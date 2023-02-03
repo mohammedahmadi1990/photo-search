@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createClient } from "pexels";
 import "./gallery.css";
+import lruCache from "lru-cache";
+
+const cache = new lruCache({ max: 50 });
 
 export const Gallery = ({ query }) => {
   const [images, setImages] = useState([]);
@@ -12,14 +15,20 @@ export const Gallery = ({ query }) => {
   useEffect(() => {
     const fetchData = async () => {
       let result;
-      if (query === "") {
-        result = await pexelsClient.photos.search({
-          query,
-          page,
-          per_page: 12,
-        });
+      const cacheKey = query ? `${query}_${page}` : page;
+      if (cache.has(cacheKey)) {
+        result = cache.get(cacheKey);
       } else {
-        result = await pexelsClient.photos.curated({ page, per_page: 12 });
+        if (query) {
+          result = await pexelsClient.photos.search({
+            query,
+            page,
+            per_page: 12,
+          });
+        } else {
+          result = await pexelsClient.photos.curated({ page, per_page: 12 });
+        }
+        cache.set(cacheKey, result);
       }
       setImages(result.photos);
       setHasPreviousPage(result.page > 1);
