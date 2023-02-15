@@ -1,3 +1,6 @@
+# Simple Image Search using React
+![Front View]([path/to/image](https://github.com/mohammedahmadi1990/photo-search/raw/main/amazing%20space.png))
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
