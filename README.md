@@ -1,5 +1,5 @@
 # Simple Image Search using React
-![Front View]([https://raw.githubusercontent.com/mohammedahmadi1990/photo-search/main/amazing%20space.png])
+![Front View](https://raw.githubusercontent.com/mohammedahmadi1990/photo-search/main/amazing%20space.png)
 
 # Getting Started with Create React App
 
